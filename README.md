@@ -1,5 +1,19 @@
 # Recurring Select
 
+## modifications for Rails6 and Webpacker
+
+- add following in package.json
+```
+@rails/webpacker": "4.3.0",
+"coffee-loader": "^1.0.1",
+"coffeescript": "^2.5.1",
+```
+(added with rails `webpacker:install:erb` and `rails webpacker:install:coffee`)
+
+- add .coffee.erb to `config/webpacker.yml` under extensions
+
+## Orginal README
+
 [![Build Status](https://travis-ci.org/GetJobber/recurring_select.svg?branch=master)](https://travis-ci.org/GetJobber/recurring_select) [![Code Climate](https://codeclimate.com/github/GetJobber/recurring_select.png)](https://codeclimate.com/github/GetJobber/recurring_select)
 
 This gem adds selectors and helpers for working with recurring schedules in a Rails app. It uses [ice_cube](https://github.com/seejohnrun/ice_cube) recurring scheduling gem.

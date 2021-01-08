@@ -1,5 +1,4 @@
-#= require recurring_select_dialog
-#= require_self
+require("./recurring_select_dialog.js");
 
 $ = jQuery
 $ ->
