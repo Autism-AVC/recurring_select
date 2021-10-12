@@ -16,6 +16,7 @@ methods =
   changed: ->
     if @val() == "custom"
       methods.open_custom.apply(@)
+      setModalTabbing()
     else
       methods.set_initial_values.apply(@)
 
@@ -94,6 +95,11 @@ $.fn.recurring_select.texts = {
   years: "year(s)"
   day_of_month: "Day of month"
   day_of_week: "Day of week"
+  ends: "Ends"
+  never: "Never"
+  after: "After"
+  occurrences: "occurrences"
+  on: "On"
   cancel: "Cancel"
   ok: "OK"
   summary: "Summary"
@@ -102,3 +108,19 @@ $.fn.recurring_select.texts = {
   order: ["1st", "2nd", "3rd", "4th", "5th", "Last"]
   show_week: [true, true, true, true, false, false]
 }
+
+# ========================= 508 Accessiblity ===============================
+setModalTabbing = ->
+  tabbables = $('#rs_modal').find(':tabbable')
+  $('#rs_modal').off('keydown').on 'keydown', (e) ->
+    `var x`
+    if $(e.target).is(tabbables.first()) and e.which == 9 and e.shiftKey
+      e.preventDefault()
+      x = tabbables.last()
+      x.focus()
+    else if $(e.target).is(tabbables.last()) and e.which == 9 and !e.shiftKey
+      e.preventDefault()
+      x = tabbables.first()
+      x.focus()
+    return
+  return
