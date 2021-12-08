@@ -2,6 +2,31 @@ require "recurring_select/engine"
 require "ice_cube"
 
 module RecurringSelect
+  class << self
+    attr_writer :date_format
+
+    def date_format
+      @date_format || '%Y-%m-%d'
+    end
+
+    # Convert from format to jQuery UI datepicker date format
+    def datepicker_format
+      datepicker_format = String.new date_format
+      @datepicker_mappings.each { |k, v| datepicker_format[k] &&= v }
+      datepicker_format
+    end
+  end
+
+  @datepicker_mappings = {
+    '%Y' => 'yy',
+    '%y' => 'y',
+    '%m' => 'mm',
+    '%-m' => 'm',
+    '%d' => 'dd',
+    '%-d' => 'd',
+    '%D' => 'mm/dd/y',
+    '%x' => 'mm/dd/y'
+  }
 
   def self.dirty_hash_to_rule(params)
     if params.is_a? IceCube::Rule
@@ -15,7 +40,6 @@ module RecurringSelect
         rules_hash = filter_params(params)
         IceCube::Rule.from_hash(rules_hash)
       end
-
     end
   end
 
